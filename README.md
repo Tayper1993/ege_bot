@@ -33,7 +33,10 @@ pip install -r requirements.txt
 ```bash
 pip-compile --extra=dev -o requirements-dev.txt pyproject.toml
 ```
-
+* Устанавливаем `dev` зависимости
+```bash
+pip install -r requirements-dev.txt
+```
 
 ## Конфигурация:
 * Переменные окружения берутся из файла `.environment`
