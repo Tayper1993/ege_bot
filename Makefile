@@ -7,6 +7,6 @@ up:
 down:
 	docker compose -f docker-compose.yaml down
 logs:
-	docker logs -f --tail=${TAIL} ege_bot 2>&1
+	docker logs -f --tail=${TAIL} telegram_bot_ege 2>&1
 pre-commit:
 	pip install pre-commit && pre-commit run --all-files

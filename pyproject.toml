@@ -1,5 +1,5 @@
 [project]
-name = 'ege_bot'
+name = 'telegram_bot_ege'
 version = '0.1.0'
 description = 'Бот для зарплаты'
 requires-python = ">=3.12"
