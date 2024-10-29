@@ -7,7 +7,7 @@
 aiofiles==24.1.0
     # via aiogram
 aiogram==3.13.1
-    # via ege_bot (pyproject.toml)
+    # via telegram_bot_ege (pyproject.toml)
 aiohappyeyeballs==2.4.3
     # via aiohttp
 aiohttp==3.10.10
@@ -15,7 +15,7 @@ aiohttp==3.10.10
 aiosignal==1.3.1
     # via aiohttp
 alembic==1.13.3
-    # via ege_bot (pyproject.toml)
+    # via telegram_bot_ege (pyproject.toml)
 annotated-types==0.7.0
     # via pydantic
 async-timeout==4.0.3
@@ -23,7 +23,7 @@ async-timeout==4.0.3
     #   aiohttp
     #   asyncpg
 asyncpg==0.30.0
-    # via ege_bot (pyproject.toml)
+    # via telegram_bot_ege (pyproject.toml)
 attrs==24.2.0
     # via aiohttp
 certifi==2024.8.30
@@ -49,15 +49,21 @@ multidict==6.1.0
 propcache==0.2.0
     # via yarl
 pydantic==2.9.2
-    # via aiogram
+    # via
+    #   aiogram
+    #   pydantic-settings
 pydantic-core==2.23.4
     # via pydantic
+pydantic-settings==2.6.0
+    # via telegram_bot_ege (pyproject.toml)
 python-dotenv==1.0.1
-    # via ege_bot (pyproject.toml)
+    # via
+    #   pydantic-settings
+    #   telegram_bot_ege (pyproject.toml)
 sqlalchemy==2.0.35
     # via
     #   alembic
-    #   ege_bot (pyproject.toml)
+    #   telegram_bot_ege (pyproject.toml)
 typing-extensions==4.12.2
     # via
     #   aiogram
