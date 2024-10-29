@@ -9,3 +9,14 @@ services:
         context: .
         dockerfile: Dockerfile
     command: sh -c "python main.py"
+
+  db:
+    container_name: telegram_bot_ege_bd
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: scot
+      POSTGRES_PASSWORD: tiger
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
