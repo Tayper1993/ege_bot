@@ -1,9 +1,7 @@
 from sqlalchemy import SmallInteger, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-
 from core.base import Base
-
 
 
 class Score(Base):

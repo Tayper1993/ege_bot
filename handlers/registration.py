@@ -62,5 +62,5 @@ async def register_user(message: Message, state: FSMContext):
         command = RegisterStudentCommand(name, surname, tg_user_id, session)
         await command.execute()
 
-    await message.answer(f"Регистрация завершена! Добро пожаловать, {name} {surname}!")
+    await message.reply(f"Регистрация завершена! Добро пожаловать, {name} {surname}!", reply_markup=kb_main_menu)
     await state.clear()

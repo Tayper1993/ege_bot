@@ -1,8 +1,8 @@
 """init_revision
 
-Revision ID: 2bc198de509f
+Revision ID: 6c3b03804b4d
 Revises: 
-Create Date: 2024-10-30 11:55:30.142298
+Create Date: 2024-10-30 14:32:40.602964
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '2bc198de509f'
+revision: str = '6c3b03804b4d'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -30,9 +30,8 @@ def upgrade() -> None:
     )
     op.create_table('subjects',
     sa.Column('id', sa.Integer(), nullable=False, comment='Идентификатор'),
-    sa.Column('name', sa.String(length=100), nullable=False, comment='Название школьного предмета'),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.Column('name', sa.Enum('RUSSIAN_LANGUAGE', 'LITERATURE', 'FOREIGN_LANGUAGE', 'ALGEBRA', 'GEOMETRY', 'PHYSICS', 'CHEMISTRY', 'BIOLOGY', 'GEOGRAPHY', 'INFORMATICS', 'HISTORY', 'LOCAL_STUDIES', 'WORLD_ART_CULTURE', 'SOCIAL_STUDIES', 'SAFETY_OF_LIFE', 'FINANCIAL_LITERACY', 'ECONOMICS', 'PHYSICAL_EDUCATION', 'PROJECT_ACTIVITY', name='subjectenum'), nullable=False, comment='Название школьного предмета'),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('scores',
     sa.Column('id', sa.Integer(), nullable=False, comment='Идентификатор'),
