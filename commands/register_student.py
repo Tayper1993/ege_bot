@@ -14,6 +14,6 @@ class RegisterStudentCommand:
         self.session = session
 
     async def execute(self):
-        new_user = Student(name=self.name, surname=self.surname)
+        new_student = Student(name=self.name, surname=self.surname)
         async with self.session.begin():
-            self.session.add(new_user)
+            self.session.add(new_student)
