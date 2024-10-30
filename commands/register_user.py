@@ -1,8 +1,8 @@
-from core.models.student import User
+from core.models.student import Student
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
-class RegisterUserCommand:
+class RegisterStudentCommand:
     def __init__(
             self,
             name: str,
@@ -14,6 +14,6 @@ class RegisterUserCommand:
         self.session = session
 
     async def execute(self):
-        new_user = User(name=self.name, surname=self.surname)
+        new_user = Student(name=self.name, surname=self.surname)
         async with self.session.begin():
             self.session.add(new_user)
