@@ -2,7 +2,7 @@ from core.models.subject import Subject
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
-class AddScoreCommand:
+class AddSubjectCommand:
     def __init__(self, name: str, session: AsyncSession):
         self.name = name
         self.session = session
