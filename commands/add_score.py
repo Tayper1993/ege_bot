@@ -15,5 +15,5 @@ class AddScoreCommand:
             subject_id=self.subject_id,
             score=self.score,
         )
-        async with self.session.begin():
-            self.session.add(add_score)
+        self.session.add(add_score)
+        await self.session.commit()

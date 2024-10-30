@@ -6,7 +6,8 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
 from core.settings import settings
-from handlers.added_subject import router_subject
+from handlers.added_score import router_subject
+# from handlers.added_subject import router_subject
 from handlers.registration import router
 
 logging.basicConfig(level=logging.INFO)

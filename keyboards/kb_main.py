@@ -4,7 +4,7 @@ kb_main_menu = ReplyKeyboardMarkup(
   keyboard=[
     [
       KeyboardButton(text="Добавить предмет"),
-      KeyboardButton(text="Посмотреть мои баллы")
+      KeyboardButton(text="Добавить баллы")
     ],
     [
       KeyboardButton(text="Посмотреть мои предметы")
