@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message
 
-from commands.register_user import RegisterUserCommand
+from commands.register_student import RegisterStudentCommand
 from core.base import get_session
 from keyboards.kb_registration import kb_yes_or_no
 
@@ -48,7 +48,7 @@ async def register_user(message: Message, state: FSMContext):
     name = user_data.get('name')
 
     async with get_session() as session:
-        command = RegisterUserCommand(name, surname, session)
+        command = RegisterStudentCommand(name, surname, session)
         await command.execute()
 
     await message.answer(f"Регистрация завершена! Добро пожаловать, {name} {surname}!")
