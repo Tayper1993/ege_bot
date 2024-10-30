@@ -6,6 +6,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
 from core.settings import settings
+from handlers.added_subject import router_subject
 from handlers.registration import router
 
 logging.basicConfig(level=logging.INFO)
@@ -18,6 +19,7 @@ dp = Dispatcher()
 
 async def main():
     dp.include_router(router)
+    dp.include_router(router_subject)
     await dp.start_polling(bot)
 
 
