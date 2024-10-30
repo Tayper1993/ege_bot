@@ -1,4 +1,4 @@
-from core.models.users import User
+from core.models.student import User
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
