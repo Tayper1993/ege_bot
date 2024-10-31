@@ -1,15 +1,16 @@
-from aiogram import types, Router, F
+from aiogram import F, Router, types
 from aiogram.filters import CommandStart, StateFilter
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import StatesGroup, State
+from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
 from sqlalchemy import select
 
 from commands.register_student import RegisterStudentCommand
-from core.models.student import Student
 from core.base import get_session
-from keyboards.kb_registration import kb_yes_or_no
+from core.models.student import Student
 from keyboards.kb_main import kb_main_menu
+from keyboards.kb_registration import kb_yes_or_no
+
 
 router = Router()
 
@@ -25,10 +26,10 @@ async def cmd_start(message: Message, state: FSMContext):
         tg_user_id = message.from_user.id
         existing_student = await session.execute(select(Student).where(Student.telegram_user_id == tg_user_id))
         if existing_student.scalars().first():
-            await message.reply("Вы уже зарегистрированы!", reply_markup=kb_main_menu)
+            await message.reply('Вы уже зарегистрированы!', reply_markup=kb_main_menu)
             return
 
-        await message.reply("Привет! Желаете зарегистрироваться?", reply_markup=kb_yes_or_no)
+        await message.reply('Привет! Желаете зарегистрироваться?', reply_markup=kb_yes_or_no)
 
 
 @router.message(F.text == 'Да')
@@ -39,7 +40,7 @@ async def process_name(message: Message, state: FSMContext):
 
 @router.message(F.text == 'Нет')
 async def close_bot(message: types.Message, state: FSMContext):
-    await message.reply("До свидания!")
+    await message.reply('До свидания!')
     await state.clear()
 
 

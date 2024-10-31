@@ -1,8 +1,7 @@
-from sqlalchemy import Enum, String
+from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.base import Base
-from core.models.enums import SubjectEnum
 
 
 class Subject(Base):

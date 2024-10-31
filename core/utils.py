@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from core import SubjectEnum, Subject, Score, Student
+from core import Score, Student, Subject, SubjectEnum
 from core.base import get_session
 
 
@@ -21,9 +21,6 @@ async def get_missing_subjects(telegram_user_id: int) -> list[SubjectEnum]:
         )
         existing_subject_names = [subject.name for subject in existing_subjects.scalars()]
 
-    missing_subjects = [
-        subject for subject in SubjectEnum
-        if subject.value not in existing_subject_names
-    ]
+    missing_subjects = [subject for subject in SubjectEnum if subject.value not in existing_subject_names]
 
     return missing_subjects

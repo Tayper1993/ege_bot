@@ -1,5 +1,6 @@
-from core.models.score import Score
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from core.models.score import Score
 
 
 class AddScoreCommand:

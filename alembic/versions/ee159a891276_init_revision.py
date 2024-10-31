@@ -5,16 +5,18 @@ Revises:
 Create Date: 2024-10-30 17:30:49.477551
 
 """
-from typing import Sequence, Union
+from collections.abc import Sequence
+
+import sqlalchemy as sa
 
 from alembic import op
-import sqlalchemy as sa
+
 
 # revision identifiers, used by Alembic.
 revision: str = 'ee159a891276'
-down_revision: Union[str, None] = None
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+down_revision: str | None = None
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
@@ -24,17 +26,21 @@ def upgrade() -> None:
         sa.Column('id', sa.Integer(), nullable=False, comment='Идентификатор'),
         sa.Column('name', sa.String(length=200), nullable=False, comment='Имя'),
         sa.Column('surname', sa.String(length=200), nullable=False, comment='Фамилия'),
-        sa.Column('telegram_user_id', sa.Integer(), nullable=False,
-                  comment='Уникальный идентификатор пользователя в телеграмм'),
+        sa.Column(
+            'telegram_user_id',
+            sa.Integer(),
+            nullable=False,
+            comment='Уникальный идентификатор пользователя в телеграмм',
+        ),
         sa.PrimaryKeyConstraint('id'),
-        sa.UniqueConstraint('telegram_user_id')
+        sa.UniqueConstraint('telegram_user_id'),
     )
 
     op.create_table(
         'subjects',
         sa.Column('id', sa.Integer(), nullable=False, comment='Идентификатор'),
         sa.Column('name', sa.String(), nullable=False, comment='Название школьного предмета'),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
     )
 
     op.create_table(
@@ -43,40 +49,42 @@ def upgrade() -> None:
         sa.Column('student_id', sa.Integer(), nullable=False),
         sa.Column('subject_id', sa.Integer(), nullable=False),
         sa.Column('score', sa.SmallInteger(), nullable=False, comment='Баллы'),
-        sa.ForeignKeyConstraint(['student_id'], ['students.id'], ),
-        sa.ForeignKeyConstraint(['subject_id'], ['subjects.id'], ),
-        sa.PrimaryKeyConstraint('id')
+        sa.ForeignKeyConstraint(
+            ['student_id'],
+            ['students.id'],
+        ),
+        sa.ForeignKeyConstraint(
+            ['subject_id'],
+            ['subjects.id'],
+        ),
+        sa.PrimaryKeyConstraint('id'),
     )
     # ### end Alembic commands ###
 
     # Определяем объект таблицы subjects
-    subjects_table = sa.Table(
-        'subjects',
-        sa.MetaData(),
-        autoload_with=op.get_bind()  # Загружаем метаданные таблицы
-    )
+    subjects_table = sa.Table('subjects', sa.MetaData(), autoload_with=op.get_bind())  # Загружаем метаданные таблицы
 
     # Вставляем данные в таблицу subjects
     subjects = [
-        {'name': "Русский язык"},
-        {'name': "Литература"},
-        {'name': "Иностранный язык"},
-        {'name': "Алгебра"},
-        {'name': "Геометрия"},
-        {'name': "Физика"},
-        {'name': "Химия"},
-        {'name': "Биология"},
-        {'name': "География"},
-        {'name': "Информатика (ИКТ)"},
-        {'name': "История"},
-        {'name': "Краеведение"},
-        {'name': "Мировая художественная культура (МХК)"},
-        {'name': "Обществознание"},
-        {'name': "Основы безопасности жизнедеятельности"},
-        {'name': "Основы финансовой грамотности"},
-        {'name': "Основы экономики (экономика)"},
-        {'name': "Физическая культура"},
-        {'name': "Проектная деятельность"},
+        {'name': 'Русский язык'},
+        {'name': 'Литература'},
+        {'name': 'Иностранный язык'},
+        {'name': 'Алгебра'},
+        {'name': 'Геометрия'},
+        {'name': 'Физика'},
+        {'name': 'Химия'},
+        {'name': 'Биология'},
+        {'name': 'География'},
+        {'name': 'Информатика (ИКТ)'},
+        {'name': 'История'},
+        {'name': 'Краеведение'},
+        {'name': 'Мировая художественная культура (МХК)'},
+        {'name': 'Обществознание'},
+        {'name': 'Основы безопасности жизнедеятельности'},
+        {'name': 'Основы финансовой грамотности'},
+        {'name': 'Основы экономики (экономика)'},
+        {'name': 'Физическая культура'},
+        {'name': 'Проектная деятельность'},
     ]
 
     # Вставляем данные в таблицу subjects

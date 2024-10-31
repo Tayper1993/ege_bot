@@ -1,14 +1,15 @@
-from core.models.student import Student
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from core.models.student import Student
 
 
 class RegisterStudentCommand:
     def __init__(
-            self,
-            name: str,
-            surname: str,
-            telegram_user_id: int,
-            session: AsyncSession,
+        self,
+        name: str,
+        surname: str,
+        telegram_user_id: int,
+        session: AsyncSession,
     ):
         self.name = name
         self.surname = surname

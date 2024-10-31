@@ -1,4 +1,4 @@
-from sqlalchemy import SmallInteger, ForeignKey
+from sqlalchemy import ForeignKey, SmallInteger
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.base import Base
