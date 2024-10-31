@@ -49,13 +49,28 @@ async def cmd_add_score(message: types.Message, state: FSMContext):
         subject_query = await session.execute(select(Subject).where(Subject.name == subject_name))
         result_subject_query = subject_query.scalars().first()
 
-        command = AddScoreCommand(
-            student_id=result_student_query.id,
-            subject_id=result_subject_query.id,
-            score=score,
-            session=session,
+        score_query = await session.execute(
+            select(
+                Score
+            ).where(
+                Score.student_id == result_student_query.id,
+                Score.subject_id == result_subject_query.id,
+            )
         )
-        await command.execute()
+        result_score_query = score_query.scalars().first()
+
+        if result_score_query:
+            result_score_query.score = score
+            await session.merge(result_score_query)  # Обновление записи в сессии
+            await session.commit()
+        else:
+            command = AddScoreCommand(
+                student_id=result_student_query.id,
+                subject_id=result_subject_query.id,
+                score=score,
+                session=session,
+            )
+            await command.execute()
 
     await message.reply(f"Количество баллов занесено", reply_markup=kb_main_menu)
     await state.clear()
