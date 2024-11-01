@@ -8,6 +8,7 @@ from aiogram.enums import ParseMode
 from core.settings import settings
 from handlers.added_score import router_subject
 from handlers.registration import router
+from handlers.view_score import router_view_score
 
 
 logging.basicConfig(level=logging.INFO)
@@ -21,6 +22,7 @@ dp = Dispatcher()
 async def main():
     dp.include_router(router)
     dp.include_router(router_subject)
+    dp.include_router(router_view_score)
     await dp.start_polling(bot)
 
 
