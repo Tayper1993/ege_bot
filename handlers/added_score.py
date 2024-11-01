@@ -1,5 +1,5 @@
 from aiogram import F, Router, types
-from aiogram.filters import StateFilter
+from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from sqlalchemy import select
@@ -19,6 +19,7 @@ class ScoreStates(StatesGroup):
 
 
 @router_subject.message(F.text == 'Добавить баллы')
+@router_subject.message(Command('enter_scores'))
 async def start_score_addition(message: types.Message, state: FSMContext):
     await state.set_state(ScoreStates.subject_name)
     await message.reply('Отлично! Введите предмет по которому вы хотите внести баллы')
@@ -43,8 +44,16 @@ async def set_score_value(message: types.Message, state: FSMContext):
         student_query = await session.execute(select(Student).where(Student.telegram_user_id == tg_user_id))
         result_student_query = student_query.scalars().first()
 
+        if result_student_query is None:
+            await message.answer('Такого студента нету')
+            await state.clear()
+
         subject_query = await session.execute(select(Subject).where(Subject.name == subject_name))
         result_subject_query = subject_query.scalars().first()
+
+        if result_subject_query is None:
+            await message.answer('Вы не добавили предмет')
+            await state.clear()
 
         score_query = await session.execute(
             select(Score).where(
