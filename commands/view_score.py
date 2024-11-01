@@ -21,6 +21,6 @@ class ViewScoreCommand:
         students = results.all()
 
         return [
-            f"Студент: {student_name}, Предмет: {subject_name}, Оценка: {score}, "
+            f"Студент: {student_name}, Предмет: {subject_name}, Оценка: {score}"
             for student_name, score, subject_name in students
         ]

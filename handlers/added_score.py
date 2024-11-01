@@ -56,7 +56,7 @@ async def set_score_value(message: types.Message, state: FSMContext):
 
         if result_score_query:
             result_score_query.score = score
-            await session.merge(result_score_query)  # Обновление записи в сессии
+            await session.merge(result_score_query)
             await session.commit()
         else:
             command = AddScoreCommand(

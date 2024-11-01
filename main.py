@@ -13,7 +13,7 @@ from handlers.view_score import router_view_score
 
 logging.basicConfig(level=logging.INFO)
 
-API_TOKEN = settings.TOKEN  # Замените на ваш токен
+API_TOKEN = settings.TOKEN
 bot = Bot(token=API_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 dp = Dispatcher()
