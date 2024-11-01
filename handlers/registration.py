@@ -1,5 +1,5 @@
 from aiogram import F, Router, types
-from aiogram.filters import CommandStart, StateFilter, Command
+from aiogram.filters import Command, CommandStart, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
@@ -10,6 +10,7 @@ from core.base import get_session
 from core.models.student import Student
 from keyboards.kb_main import kb_main_menu
 from keyboards.kb_registration import kb_yes_or_no
+
 
 router = Router()
 
@@ -32,7 +33,7 @@ async def cmd_start(message: Message, state: FSMContext):
 
 
 @router.message(F.text == 'Да')
-@router.message(Command("register"))
+@router.message(Command('register'))
 async def process_name(message: Message, state: FSMContext):
     async with get_session() as session:
         tg_user_id = message.from_user.id

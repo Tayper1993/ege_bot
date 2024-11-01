@@ -7,6 +7,7 @@ from sqlalchemy import select
 from commands.add_score import AddScoreCommand
 from core import Score, Student, Subject
 from core.base import get_session
+from core.utils import check_user_registered
 from keyboards.kb_main import kb_main_menu
 
 
@@ -20,6 +21,7 @@ class ScoreStates(StatesGroup):
 
 @router_subject.message(F.text == 'Добавить баллы')
 @router_subject.message(Command('enter_scores'))
+@check_user_registered
 async def start_score_addition(message: types.Message, state: FSMContext):
     await state.set_state(ScoreStates.subject_name)
     await message.reply('Отлично! Введите предмет по которому вы хотите внести баллы')
