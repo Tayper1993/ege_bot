@@ -9,7 +9,7 @@ from core import Score, Student, Subject
 from core.base import get_session
 from core.utils import check_user_registered
 from keyboards.kb_main import kb_main_menu
-
+from keyboards.kb_subjects import get_subjects_keyboard
 
 router_subject = Router()
 
@@ -24,7 +24,9 @@ class ScoreStates(StatesGroup):
 @check_user_registered
 async def start_score_addition(message: types.Message, state: FSMContext):
     await state.set_state(ScoreStates.subject_name)
-    await message.reply('Отлично! Введите предмет по которому вы хотите внести баллы')
+    async with get_session() as session:
+        kb_subjects = await get_subjects_keyboard(session)
+    await message.reply('Отлично! Введите предмет по которому вы хотите внести баллы', reply_markup=kb_subjects)
 
 
 @router_subject.message(StateFilter(ScoreStates.subject_name))
